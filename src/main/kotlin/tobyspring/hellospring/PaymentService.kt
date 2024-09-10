@@ -12,7 +12,21 @@ import java.time.LocalDateTime
 class PaymentService {
 
     fun prepare(orderId: Long, currency: String, foreignCurrencyAmount: BigDecimal): Payment {
-        // https://open.er-api.com/v6/latest/USD
+        val exRate = getExRate(currency)
+        val convertedAmount = foreignCurrencyAmount.multiply(exRate)
+        val validUntil = LocalDateTime.now().plusMinutes(30)
+
+        return Payment(
+            orderId = orderId,
+            currency = currency,
+            foreignCurrencyAmount = foreignCurrencyAmount,
+            exRate = exRate,
+            convertedAmount = convertedAmount,
+            validUntil = validUntil
+        )
+    }
+
+    private fun getExRate(currency: String): BigDecimal? {
         val url = URL("https://open.er-api.com/v6/latest/${currency}")
         val connection = url.openConnection() as HttpURLConnection
         val data = connection.inputStream.bufferedReader().use {
@@ -24,19 +38,7 @@ class PaymentService {
         }.first()
 
         val exRate = data.rates["KRW"]
-
-        val convertedAmount = foreignCurrencyAmount.multiply(exRate)
-
-        val validUntil = LocalDateTime.now().plusMinutes(30)
-
-        return Payment(
-            orderId = orderId,
-            currency = currency,
-            foreignCurrencyAmount = foreignCurrencyAmount,
-            exRate = exRate,
-            convertedAmount = convertedAmount,
-            validUntil = validUntil
-        )
+        return exRate
     }
 }
 
