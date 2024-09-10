@@ -3,10 +3,10 @@ package tobyspring.hellospring
 import java.math.BigDecimal
 import java.time.LocalDateTime
 
-abstract class PaymentService {
+class PaymentService(private val exRateProvider: ExRateProvider) {
 
     fun prepare(orderId: Long, currency: String, foreignCurrencyAmount: BigDecimal): Payment {
-        val exRate = getExRate(currency)
+        val exRate = exRateProvider.getExRate(currency)
         val convertedAmount = foreignCurrencyAmount.multiply(exRate)
         val validUntil = LocalDateTime.now().plusMinutes(30)
 
@@ -19,6 +19,4 @@ abstract class PaymentService {
             validUntil = validUntil
         )
     }
-
-    abstract fun getExRate(currency: String): BigDecimal
 }
