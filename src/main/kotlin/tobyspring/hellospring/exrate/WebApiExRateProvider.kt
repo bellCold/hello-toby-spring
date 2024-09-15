@@ -1,9 +1,10 @@
-package tobyspring.hellospring
+package tobyspring.hellospring.exrate
 
 import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.registerKotlinModule
+import tobyspring.hellospring.payment.ExRateProvider
 import java.math.BigDecimal
 import java.net.HttpURLConnection
 import java.net.URL

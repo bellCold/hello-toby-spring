@@ -1,4 +1,4 @@
-package tobyspring.hellospring
+package tobyspring.hellospring.global.config
 
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.ObjectMapper

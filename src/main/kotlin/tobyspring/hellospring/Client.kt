@@ -1,6 +1,7 @@
 package tobyspring.hellospring
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext
+import tobyspring.hellospring.payment.PaymentService
 import java.math.BigDecimal
 
 fun main() {
