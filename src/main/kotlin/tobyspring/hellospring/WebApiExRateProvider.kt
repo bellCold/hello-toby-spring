@@ -20,6 +20,8 @@ class WebApiExRateProvider : ExRateProvider {
             objectMapper.readValue(message, object : TypeReference<List<ExRateData>>() {})
         }.first()
 
-        return data.rates["KRW"]!!
+        println("API ExRate: ${data.rates["KRW"]}")
+
+        return data.rates["KRW"] ?: BigDecimal.ZERO
     }
 }
