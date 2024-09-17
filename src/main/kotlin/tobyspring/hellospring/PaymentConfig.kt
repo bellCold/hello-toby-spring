@@ -6,12 +6,13 @@ import tobyspring.hellospring.exrate.CachedExRateProvider
 import tobyspring.hellospring.payment.ExRateProvider
 import tobyspring.hellospring.exrate.WebApiExRateProvider
 import tobyspring.hellospring.payment.PaymentService
+import java.time.Clock
 
 @Configuration
-class ObjectFactory {
+class PaymentConfig {
     @Bean
     fun paymentService(): PaymentService {
-        return PaymentService(exRateProvider())
+        return PaymentService(exRateProvider(), clock())
     }
 
     @Bean
@@ -22,5 +23,10 @@ class ObjectFactory {
     @Bean
     fun cachedRateProvider(): ExRateProvider {
         return CachedExRateProvider(exRateProvider())
+    }
+
+    @Bean
+    fun clock(): Clock {
+        return Clock.systemDefaultZone()
     }
 }
