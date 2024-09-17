@@ -8,16 +8,13 @@ class PaymentService(private val exRateProvider: ExRateProvider, private val clo
 
     fun prepare(orderId: Long, currency: String, foreignCurrencyAmount: BigDecimal): Payment {
         val exRate = exRateProvider.getExRate(currency)
-        val convertedAmount = foreignCurrencyAmount.multiply(exRate)
-        val validUntil = LocalDateTime.now(clock).plusMinutes(30)
 
-        return Payment(
+        return Payment.createPrepared(
             orderId = orderId,
             currency = currency,
             foreignCurrencyAmount = foreignCurrencyAmount,
             exRate = exRate,
-            convertedAmount = convertedAmount,
-            validUntil = validUntil
+            now = LocalDateTime.now(clock)
         )
     }
 }
