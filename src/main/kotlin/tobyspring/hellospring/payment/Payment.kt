@@ -7,7 +7,7 @@ class Payment(
     val orderId: Long,
     val currency: String,
     val foreignCurrencyAmount: BigDecimal,
-    val exRate: BigDecimal?,
+    val exRate: BigDecimal,
     val convertedAmount: BigDecimal,
     val validUntil: LocalDateTime
 ) {

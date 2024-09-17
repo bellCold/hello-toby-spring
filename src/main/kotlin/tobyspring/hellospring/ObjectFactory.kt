@@ -11,7 +11,7 @@ import tobyspring.hellospring.payment.PaymentService
 class ObjectFactory {
     @Bean
     fun paymentService(): PaymentService {
-        return PaymentService(cachedRateProvider())
+        return PaymentService(exRateProvider())
     }
 
     @Bean
