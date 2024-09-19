@@ -45,9 +45,4 @@ class DataConfig {
     fun transactionManager(emf: EntityManagerFactory): JpaTransactionManager {
         return JpaTransactionManager(emf)
     }
-
-    @Bean
-    fun orderRepository(): OrderRepository {
-        return OrderRepository()
-    }
 }
