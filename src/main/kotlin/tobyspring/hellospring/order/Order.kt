@@ -1,14 +1,9 @@
 package tobyspring.hellospring.order
 
-import jakarta.persistence.*
 import java.math.BigDecimal
 
-@Entity
-@Table(name = "orders")
 class Order(
-    @Id @GeneratedValue
-    val id: Long?,
-    @Column(unique = true)
+    val id: Long? = 0,
     val no: String,
     val total: BigDecimal
 ) {
