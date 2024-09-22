@@ -5,12 +5,11 @@ import jakarta.persistence.PersistenceContext
 import tobyspring.hellospring.order.Order
 import tobyspring.hellospring.order.OrderRepository
 
-class JpaOrderRepository: OrderRepository {
+class JpaOrderRepository : OrderRepository {
     @PersistenceContext
     private lateinit var em: EntityManager
 
-    override fun save(order: Order): Order {
+    override fun save(order: Order) {
         em.persist(order)
-        return order
     }
 }

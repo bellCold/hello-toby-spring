@@ -10,12 +10,16 @@ class OrderService(
     private val orderRepository: OrderRepository,
     private val transactionManager: PlatformTransactionManager
 ) {
-    fun createOrder(no: String, total: BigDecimal): Order? {
+    fun createOrder(no: String, total: BigDecimal): Order {
         val order = Order(no, total)
 
         return TransactionTemplate(transactionManager).execute {
             orderRepository.save(order)
             return@execute order
-        }
+        } ?: throw IllegalStateException("error")
+    }
+
+    fun createOrders(request: List<OrderRequest>): List<Order> {
+        return request.map { createOrder(it.no, it.total) }
     }
 }

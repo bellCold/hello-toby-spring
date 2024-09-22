@@ -3,6 +3,7 @@ package tobyspring.hellospring.order
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.context.TestConstructor
 import org.springframework.test.context.junit.jupiter.SpringExtension
@@ -11,8 +12,7 @@ import java.math.BigDecimal
 
 @ExtendWith(SpringExtension::class)
 @ContextConfiguration(classes = [OrderConfig::class])
-@TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)
-class OrderServiceSpringTest(private val orderService: OrderService) {
+class OrderServiceSpringTest(@Autowired private val orderService: OrderService) {
 
     @Test
     fun createOrder() {

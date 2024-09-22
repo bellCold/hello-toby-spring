@@ -3,7 +3,7 @@ package tobyspring.hellospring.order
 import java.math.BigDecimal
 
 class Order(
-    val id: Long? = 0,
+    var id: Long? = 0,
     val no: String,
     val total: BigDecimal
 ) {
